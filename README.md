@@ -10,6 +10,20 @@
 
 ---
 
+## Live App Showcase
+
+<p align="center">
+  <img src="docs/sample.gif" width="320" alt="VaultX Portfolio Valuation & Live Sync" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="docs/sample2.gif" width="320" alt="VaultX Category Filtering & Search" />
+</p>
+
+| Real-Time Valuation & Market Sync | Reactive Category Filtering & Search |
+| :---: | :---: |
+| Pull-to-refresh triggers `SimulatedMarketFeedInterceptor` -> Retrofit -> Room SSOT -> reactive `StateFlow` P&L calculation. | Instant reactive filtering across `GradedCard`, `SealedBox`, and `Comic` categories and grade search (`PSA 10`, `CGC 9.8`). |
+
+---
+
 ## Key Architectural Highlights
 
 1. **Strict Multi-Module Clean Architecture**:
