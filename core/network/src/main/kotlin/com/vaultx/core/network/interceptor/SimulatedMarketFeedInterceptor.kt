@@ -1,9 +1,9 @@
 package com.vaultx.core.network.interceptor
 
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import com.vaultx.core.network.dto.CollectibleMetadataDto
 import com.vaultx.core.network.dto.MarketPriceUpdateDto
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.Protocol
@@ -22,14 +22,14 @@ import kotlin.random.Random
  *   allowing reviewers to observe reactive Room + StateFlow UI updates in real time.
  */
 class SimulatedMarketFeedInterceptor(
-    private val json: Json
+    private val json: Json,
 ) : Interceptor {
 
     private val currentPrices = mutableMapOf(
         "11111111-1111-1111-1111-111111111111" to 12400.0,
         "22222222-2222-2222-2222-222222222222" to 690.0,
         "33333333-3333-3333-3333-333333333333" to 2850.0,
-        "44444444-4444-4444-4444-444444444444" to 1180.0
+        "44444444-4444-4444-4444-444444444444" to 1180.0,
     )
 
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -52,7 +52,7 @@ class SimulatedMarketFeedInterceptor(
                         itemId = id,
                         latestMarketPrice = updatedPrice,
                         currency = "USD",
-                        updatedAtEpochMs = now
+                        updatedAtEpochMs = now,
                     )
                 }
                 json.encodeToString(updates)
@@ -68,7 +68,7 @@ class SimulatedMarketFeedInterceptor(
                     marketPrice = currentPrices[id] ?: 12400.0,
                     conditionGrade = "PSA 10",
                     imageUrl = "https://example.com/charizard.png",
-                    acquisitionDate = System.currentTimeMillis()
+                    acquisitionDate = System.currentTimeMillis(),
                 )
                 json.encodeToString(metadata)
             }

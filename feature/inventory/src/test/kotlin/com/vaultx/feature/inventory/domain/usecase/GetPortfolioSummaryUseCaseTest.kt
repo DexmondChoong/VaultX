@@ -55,14 +55,14 @@ class GetPortfolioSummaryUseCaseTest {
                 name = "1999 Charizard Holo PSA 10",
                 category = CollectibleCategory.GradedCard,
                 purchasePrice = 1000.0,
-                marketPrice = 1500.0
+                marketPrice = 1500.0,
             ),
             createItem(
                 name = "Pokemon Base Set Booster Box",
                 category = CollectibleCategory.SealedBox,
                 purchasePrice = 500.0,
-                marketPrice = 900.0
-            )
+                marketPrice = 900.0,
+            ),
         )
         every { repository.getCollectiblesStream() } returns flowOf(items)
 
@@ -86,14 +86,14 @@ class GetPortfolioSummaryUseCaseTest {
                 name = "Amazing Fantasy #15 CGC 4.0",
                 category = CollectibleCategory.Comic,
                 purchasePrice = 2000.0,
-                marketPrice = 1500.0
+                marketPrice = 1500.0,
             ),
             createItem(
                 name = "Modern Promo PSA 9",
                 category = CollectibleCategory.GradedCard,
                 purchasePrice = 500.0,
-                marketPrice = 250.0
-            )
+                marketPrice = 250.0,
+            ),
         )
         every { repository.getCollectiblesStream() } returns flowOf(items)
 
@@ -117,14 +117,14 @@ class GetPortfolioSummaryUseCaseTest {
                 name = "Gifted Trophy Card",
                 category = CollectibleCategory.GradedCard,
                 purchasePrice = 0.0,
-                marketPrice = 850.0
+                marketPrice = 850.0,
             ),
             createItem(
                 name = "Tournament Prize Box",
                 category = CollectibleCategory.SealedBox,
                 purchasePrice = 0.0,
-                marketPrice = 350.0
-            )
+                marketPrice = 350.0,
+            ),
         )
         every { repository.getCollectiblesStream() } returns flowOf(items)
 
@@ -149,13 +149,13 @@ class GetPortfolioSummaryUseCaseTest {
             name = "Item 1",
             category = CollectibleCategory.Comic,
             purchasePrice = 100.0,
-            marketPrice = 120.0
+            marketPrice = 120.0,
         )
         val secondItem = createItem(
             name = "Item 2",
             category = CollectibleCategory.SealedBox,
             purchasePrice = 100.0,
-            marketPrice = 180.0
+            marketPrice = 180.0,
         )
 
         getPortfolioSummaryUseCase().test {
@@ -188,7 +188,7 @@ class GetPortfolioSummaryUseCaseTest {
         marketPrice: Double,
         conditionGrade: String = "PSA 10",
         imageUrl: String = "https://example.com/image.png",
-        acquisitionDate: Long = 1700000000000L
+        acquisitionDate: Long = 1700000000000L,
     ) = CollectibleItem(
         id = id,
         name = name,
@@ -197,6 +197,6 @@ class GetPortfolioSummaryUseCaseTest {
         marketPrice = marketPrice,
         conditionGrade = conditionGrade,
         imageUrl = imageUrl,
-        acquisitionDate = acquisitionDate
+        acquisitionDate = acquisitionDate,
     )
 }

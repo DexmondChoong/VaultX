@@ -1,10 +1,10 @@
 package com.vaultx.core.database.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Upsert
-import androidx.room.Insert
 import com.vaultx.core.database.entity.CollectibleEntity
 import kotlinx.coroutines.flow.Flow
 

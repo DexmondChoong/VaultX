@@ -24,46 +24,38 @@ import javax.inject.Singleton
 @Singleton
 class CollectibleRepositoryImpl @Inject constructor(
     private val collectibleDao: CollectibleDao,
-    private val marketFeedApi: MarketFeedApi
+    private val marketFeedApi: MarketFeedApi,
 ) : CollectibleRepository {
 
-    override fun getCollectiblesStream(): Flow<List<CollectibleItem>> {
-        return collectibleDao.getAll().map { entities ->
-            entities.map { it.toDomainModel() }
-        }
+    override fun getCollectiblesStream(): Flow<List<CollectibleItem>> = collectibleDao.getAll().map { entities ->
+        entities.map { it.toDomainModel() }
     }
 
-    override fun getCollectibleById(id: String): Flow<CollectibleItem?> {
-        return collectibleDao.getById(id).map { entity ->
-            entity?.toDomainModel()
-        }
+    override fun getCollectibleById(id: String): Flow<CollectibleItem?> = collectibleDao.getById(id).map { entity ->
+        entity?.toDomainModel()
     }
 
-    override suspend fun syncMarketPrices(): Result<Unit> {
-        return try {
-            val priceUpdates = marketFeedApi.getMarketPriceUpdates()
-            priceUpdates.forEach { update ->
-                collectibleDao.updatePrice(
-                    id = update.itemId,
-                    newMarketPrice = update.latestMarketPrice
-                )
-            }
-            Result.success(Unit)
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Result.failure(e)
+    override suspend fun syncMarketPrices(): Result<Unit> = try {
+        val priceUpdates = marketFeedApi.getMarketPriceUpdates()
+        priceUpdates.forEach { update ->
+            collectibleDao.updatePrice(
+                id = update.itemId,
+                newMarketPrice = update.latestMarketPrice,
+            )
         }
+        Result.success(Unit)
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
-    override suspend fun saveCollectible(item: CollectibleItem): Result<Unit> {
-        return try {
-            collectibleDao.insertOrReplace(item.toEntity())
-            Result.success(Unit)
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun saveCollectible(item: CollectibleItem): Result<Unit> = try {
+        collectibleDao.insertOrReplace(item.toEntity())
+        Result.success(Unit)
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

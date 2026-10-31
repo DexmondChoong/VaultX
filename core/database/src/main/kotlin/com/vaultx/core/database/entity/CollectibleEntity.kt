@@ -14,8 +14,8 @@ import com.vaultx.core.model.CollectibleCategory
     tableName = "collectibles",
     indices = [
         Index(value = ["category"]),
-        Index(value = ["acquisition_date"])
-    ]
+        Index(value = ["acquisition_date"]),
+    ],
 )
 data class CollectibleEntity(
     @PrimaryKey
@@ -41,5 +41,5 @@ data class CollectibleEntity(
     val imageUrl: String,
 
     @ColumnInfo(name = "acquisition_date")
-    val acquisitionDate: Long
+    val acquisitionDate: Long,
 )

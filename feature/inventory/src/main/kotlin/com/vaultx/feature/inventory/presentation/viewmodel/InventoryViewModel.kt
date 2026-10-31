@@ -33,7 +33,7 @@ import javax.inject.Inject
 class InventoryViewModel @Inject constructor(
     getPortfolioSummaryUseCase: GetPortfolioSummaryUseCase,
     private val filterCollectiblesUseCase: FilterCollectiblesUseCase,
-    private val collectibleRepository: CollectibleRepository
+    private val collectibleRepository: CollectibleRepository,
 ) : ViewModel() {
 
     private val selectedFilterFlow = MutableStateFlow(CategoryFilter.ALL)
@@ -45,7 +45,7 @@ class InventoryViewModel @Inject constructor(
         filterCollectiblesUseCase(
             category = filter.domainCategory,
             sortOption = SortOption.DATE,
-            sortDirection = SortDirection.DESCENDING
+            sortDirection = SortDirection.DESCENDING,
         )
     }
 
@@ -54,7 +54,7 @@ class InventoryViewModel @Inject constructor(
         filteredItemsStream,
         selectedFilterFlow,
         searchQueryFlow,
-        isRefreshingFlow
+        isRefreshingFlow,
     ) { summary, items, selectedFilter, searchQuery, isRefreshing ->
         val normalizedQuery = searchQuery.trim()
         val matchingItems = if (normalizedQuery.isEmpty()) {
@@ -71,7 +71,7 @@ class InventoryViewModel @Inject constructor(
             items = matchingItems,
             selectedFilter = selectedFilter,
             searchQuery = searchQuery,
-            isRefreshing = isRefreshing
+            isRefreshing = isRefreshing,
         ) as InventoryUiState
     }
         .combine(syncErrorFlow) { baseState, errorMessage ->
@@ -84,14 +84,14 @@ class InventoryViewModel @Inject constructor(
         .catch { throwable ->
             emit(
                 InventoryUiState.Error(
-                    message = throwable.localizedMessage ?: "An unexpected error occurred loading your vault."
-                )
+                    message = throwable.localizedMessage ?: "An unexpected error occurred loading your vault.",
+                ),
             )
         }
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
-            initialValue = InventoryUiState.Loading
+            initialValue = InventoryUiState.Loading,
         )
 
     /**

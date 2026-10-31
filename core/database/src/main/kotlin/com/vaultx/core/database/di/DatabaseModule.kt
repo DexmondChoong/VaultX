@@ -18,20 +18,16 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideVaultXDatabase(
-        @ApplicationContext context: Context
-    ): VaultXDatabase {
-        return Room.databaseBuilder(
-            context,
-            VaultXDatabase::class.java,
-            VaultXDatabase.DATABASE_NAME
-        )
-            .fallbackToDestructiveMigration(dropAllTables = true)
-            .build()
-    }
+        @ApplicationContext context: Context,
+    ): VaultXDatabase = Room.databaseBuilder(
+        context,
+        VaultXDatabase::class.java,
+        VaultXDatabase.DATABASE_NAME,
+    )
+        .fallbackToDestructiveMigration(dropAllTables = true)
+        .build()
 
     @Provides
     @Singleton
-    fun provideCollectibleDao(database: VaultXDatabase): CollectibleDao {
-        return database.collectibleDao()
-    }
+    fun provideCollectibleDao(database: VaultXDatabase): CollectibleDao = database.collectibleDao()
 }

@@ -54,7 +54,7 @@ import com.vaultx.feature.inventory.presentation.viewmodel.InventoryViewModel
 fun InventoryRoute(
     onItemClick: (CollectibleItem) -> Unit = {},
     modifier: Modifier = Modifier,
-    viewModel: InventoryViewModel = hiltViewModel()
+    viewModel: InventoryViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -64,7 +64,7 @@ fun InventoryRoute(
         onFilterSelected = viewModel::onFilterSelected,
         onSearchQueryChanged = viewModel::onSearchQueryChanged,
         onItemClick = onItemClick,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
@@ -81,7 +81,7 @@ fun InventoryScreen(
     onFilterSelected: (CategoryFilter) -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onItemClick: (CollectibleItem) -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -91,29 +91,29 @@ fun InventoryScreen(
                     Text(
                         text = "VaultX Portfolio",
                         style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
                     )
                 },
                 actions = {
                     IconButton(onClick = onRefresh) {
                         Icon(
                             imageVector = Icons.Default.Refresh,
-                            contentDescription = "Sync Market Prices"
+                            contentDescription = "Sync Market Prices",
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surface
-                )
+                    containerColor = MaterialTheme.colorScheme.surface,
+                ),
             )
-        }
+        },
     ) { innerPadding ->
         when (uiState) {
             is InventoryUiState.Loading -> {
                 LoadingState(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding)
+                        .padding(innerPadding),
                 )
             }
 
@@ -123,7 +123,7 @@ fun InventoryScreen(
                     onRetry = onRefresh,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding)
+                        .padding(innerPadding),
                 )
             }
 
@@ -133,13 +133,13 @@ fun InventoryScreen(
                     onRefresh = onRefresh,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(innerPadding)
+                        .padding(innerPadding),
                 ) {
                     InventoryContent(
                         state = uiState,
                         onFilterSelected = onFilterSelected,
                         onSearchQueryChanged = onSearchQueryChanged,
-                        onItemClick = onItemClick
+                        onItemClick = onItemClick,
                     )
                 }
             }
@@ -153,12 +153,12 @@ private fun InventoryContent(
     onFilterSelected: (CategoryFilter) -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onItemClick: (CollectibleItem) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp)
+        verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         // 1. Portfolio Summary Card
         item(key = "portfolio_overview") {
@@ -169,7 +169,7 @@ private fun InventoryContent(
         item(key = "search_bar") {
             InventorySearchBar(
                 query = state.searchQuery,
-                onQueryChanged = onSearchQueryChanged
+                onQueryChanged = onSearchQueryChanged,
             )
         }
 
@@ -177,7 +177,7 @@ private fun InventoryContent(
         item(key = "filter_chips") {
             CategoryFilterChipsRow(
                 selectedFilter = state.selectedFilter,
-                onFilterSelected = onFilterSelected
+                onFilterSelected = onFilterSelected,
             )
         }
 
@@ -190,17 +190,17 @@ private fun InventoryContent(
                     onResetFilters = {
                         onFilterSelected(CategoryFilter.ALL)
                         onSearchQueryChanged("")
-                    }
+                    },
                 )
             }
         } else {
             items(
                 items = state.items,
-                key = { item -> item.id.toString() }
+                key = { item -> item.id.toString() },
             ) { collectible ->
                 CollectibleItemCard(
                     item = collectible,
-                    onClick = onItemClick
+                    onClick = onItemClick,
                 )
             }
         }
@@ -211,7 +211,7 @@ private fun InventoryContent(
 private fun InventorySearchBar(
     query: String,
     onQueryChanged: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     OutlinedTextField(
         value = query,
@@ -223,7 +223,7 @@ private fun InventorySearchBar(
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Search,
-                contentDescription = "Search"
+                contentDescription = "Search",
             )
         },
         trailingIcon = {
@@ -231,13 +231,13 @@ private fun InventorySearchBar(
                 IconButton(onClick = { onQueryChanged("") }) {
                     Icon(
                         imageVector = Icons.Default.Clear,
-                        contentDescription = "Clear search query"
+                        contentDescription = "Clear search query",
                     )
                 }
             }
         },
         singleLine = true,
-        shape = RoundedCornerShape(14.dp)
+        shape = RoundedCornerShape(14.dp),
     )
 }
 
@@ -245,15 +245,15 @@ private fun InventorySearchBar(
 private fun CategoryFilterChipsRow(
     selectedFilter: CategoryFilter,
     onFilterSelected: (CategoryFilter) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(
             items = CategoryFilter.entries,
-            key = { it.name }
+            key = { it.name },
         ) { filter ->
             FilterChip(
                 selected = filter == selectedFilter,
@@ -261,9 +261,9 @@ private fun CategoryFilterChipsRow(
                 label = {
                     Text(
                         text = filter.displayName,
-                        style = MaterialTheme.typography.labelLarge
+                        style = MaterialTheme.typography.labelLarge,
                     )
-                }
+                },
             )
         }
     }
@@ -274,14 +274,14 @@ private fun EmptyInventoryState(
     selectedFilter: CategoryFilter,
     searchQuery: String,
     onResetFilters: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 48.dp, horizontal = 24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         val isFiltered = selectedFilter != CategoryFilter.ALL || searchQuery.isNotBlank()
 
@@ -289,7 +289,7 @@ private fun EmptyInventoryState(
             text = if (isFiltered) "No Matching Collectibles" else "Your Vault is Empty",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -302,7 +302,7 @@ private fun EmptyInventoryState(
             },
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
 
         if (isFiltered) {
@@ -318,17 +318,17 @@ private fun EmptyInventoryState(
 private fun LoadingState(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             CircularProgressIndicator()
             Text(
                 text = "Decrypting Vault Portfolio...",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
     }
@@ -338,37 +338,37 @@ private fun LoadingState(modifier: Modifier = Modifier) {
 private fun ErrorState(
     message: String,
     onRetry: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier.padding(24.dp),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
                 text = "Unable to Load Portfolio",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.error
+                color = MaterialTheme.colorScheme.error,
             )
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(4.dp))
             Button(onClick = onRetry) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                 ) {
                     Icon(
                         imageVector = Icons.Default.Refresh,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                     Text("Retry Sync")
                 }

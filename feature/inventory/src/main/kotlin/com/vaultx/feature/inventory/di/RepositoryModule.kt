@@ -15,6 +15,6 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindCollectibleRepository(
-        impl: CollectibleRepositoryImpl
+        impl: CollectibleRepositoryImpl,
     ): CollectibleRepository
 }

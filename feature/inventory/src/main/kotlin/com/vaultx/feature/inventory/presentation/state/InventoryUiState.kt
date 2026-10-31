@@ -11,7 +11,7 @@ enum class CategoryFilter(val displayName: String, val domainCategory: Collectib
     ALL("All Assets", null),
     GRADED_CARD("Graded Cards", CollectibleCategory.GradedCard),
     SEALED_BOX("Sealed Boxes", CollectibleCategory.SealedBox),
-    COMIC("Comics", CollectibleCategory.Comic)
+    COMIC("Comics", CollectibleCategory.Comic),
 }
 
 /**
@@ -26,10 +26,10 @@ sealed interface InventoryUiState {
         val items: List<CollectibleItem>,
         val selectedFilter: CategoryFilter = CategoryFilter.ALL,
         val searchQuery: String = "",
-        val isRefreshing: Boolean = false
+        val isRefreshing: Boolean = false,
     ) : InventoryUiState
 
     data class Error(
-        val message: String
+        val message: String,
     ) : InventoryUiState
 }

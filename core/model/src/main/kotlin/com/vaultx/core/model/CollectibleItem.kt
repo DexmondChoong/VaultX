@@ -14,7 +14,7 @@ data class CollectibleItem(
     val marketPrice: Double,
     val conditionGrade: String,
     val imageUrl: String,
-    val acquisitionDate: Long
+    val acquisitionDate: Long,
 ) {
     /**
      * Computed unrealized profit/loss for this individual asset.

@@ -8,7 +8,7 @@ data class PortfolioSummary(
     val totalCost: Double,
     val unrealizedProfitLoss: Double,
     val returnPercentage: Double,
-    val itemCount: Int
+    val itemCount: Int,
 ) {
     companion object {
         val EMPTY = PortfolioSummary(
@@ -16,7 +16,7 @@ data class PortfolioSummary(
             totalCost = 0.0,
             unrealizedProfitLoss = 0.0,
             returnPercentage = 0.0,
-            itemCount = 0
+            itemCount = 0,
         )
     }
 }

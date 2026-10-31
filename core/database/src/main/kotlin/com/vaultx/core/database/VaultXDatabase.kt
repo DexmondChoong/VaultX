@@ -10,7 +10,7 @@ import com.vaultx.core.database.entity.CollectibleEntity
 @Database(
     entities = [CollectibleEntity::class],
     version = 1,
-    exportSchema = true
+    exportSchema = true,
 )
 @TypeConverters(CollectibleTypeConverters::class)
 abstract class VaultXDatabase : RoomDatabase() {

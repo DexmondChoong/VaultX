@@ -18,7 +18,7 @@ data class MarketPriceUpdateDto(
     val currency: String = "USD",
 
     @SerialName("updated_at_epoch_ms")
-    val updatedAtEpochMs: Long
+    val updatedAtEpochMs: Long,
 )
 
 /**
@@ -48,5 +48,5 @@ data class CollectibleMetadataDto(
     val imageUrl: String,
 
     @SerialName("acquisition_date")
-    val acquisitionDate: Long
+    val acquisitionDate: Long,
 )

@@ -25,6 +25,6 @@ fun CollectibleMetadataDto.toDomainModel(): CollectibleItem {
         marketPrice = marketPrice,
         conditionGrade = conditionGrade,
         imageUrl = imageUrl,
-        acquisitionDate = acquisitionDate
+        acquisitionDate = acquisitionDate,
     )
 }

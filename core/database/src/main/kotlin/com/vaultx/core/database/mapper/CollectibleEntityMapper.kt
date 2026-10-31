@@ -15,7 +15,7 @@ fun CollectibleEntity.toDomainModel(): CollectibleItem = CollectibleItem(
     marketPrice = marketPrice,
     conditionGrade = conditionGrade,
     imageUrl = imageUrl,
-    acquisitionDate = acquisitionDate
+    acquisitionDate = acquisitionDate,
 )
 
 fun CollectibleItem.toEntity(): CollectibleEntity = CollectibleEntity(
@@ -26,5 +26,5 @@ fun CollectibleItem.toEntity(): CollectibleEntity = CollectibleEntity(
     marketPrice = marketPrice,
     conditionGrade = conditionGrade,
     imageUrl = imageUrl,
-    acquisitionDate = acquisitionDate
+    acquisitionDate = acquisitionDate,
 )

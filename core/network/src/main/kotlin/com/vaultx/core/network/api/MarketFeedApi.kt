@@ -22,7 +22,7 @@ interface MarketFeedApi {
      */
     @GET("v1/catalog/collectibles/{id}")
     suspend fun getCollectibleMetadata(
-        @Path("id") id: String
+        @Path("id") id: String,
     ): CollectibleMetadataDto
 
     /**
@@ -30,6 +30,6 @@ interface MarketFeedApi {
      */
     @GET("v1/catalog/search")
     suspend fun searchCatalog(
-        @Query("q") query: String
+        @Query("q") query: String,
     ): List<CollectibleMetadataDto>
 }

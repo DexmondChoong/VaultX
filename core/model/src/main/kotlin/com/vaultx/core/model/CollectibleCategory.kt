@@ -9,5 +9,5 @@ import kotlinx.serialization.Serializable
 enum class CollectibleCategory {
     GradedCard,
     SealedBox,
-    Comic
+    Comic,
 }

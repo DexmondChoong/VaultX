@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                         marketPrice = 12400.0,
                         conditionGrade = "PSA 10",
                         imageUrl = "https://example.com/charizard.png",
-                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 90
+                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 90,
                     ),
                     CollectibleItem(
                         id = UUID.fromString("22222222-2222-2222-2222-222222222222"),
@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         marketPrice = 690.0,
                         conditionGrade = "Factory Sealed",
                         imageUrl = "https://example.com/evolving_skies.png",
-                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 60
+                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 60,
                     ),
                     CollectibleItem(
                         id = UUID.fromString("33333333-3333-3333-3333-333333333333"),
@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                         marketPrice = 2850.0,
                         conditionGrade = "CGC 9.8",
                         imageUrl = "https://example.com/asm300.png",
-                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 30
+                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 30,
                     ),
                     CollectibleItem(
                         id = UUID.fromString("44444444-4444-4444-4444-444444444444"),
@@ -84,8 +84,8 @@ class MainActivity : ComponentActivity() {
                         marketPrice = 1180.0,
                         conditionGrade = "Sealed Case",
                         imageUrl = "https://example.com/op05.png",
-                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 10
-                    )
+                        acquisitionDate = System.currentTimeMillis() - 86_400_000L * 10,
+                    ),
                 )
 
                 sampleItems.forEach { item ->

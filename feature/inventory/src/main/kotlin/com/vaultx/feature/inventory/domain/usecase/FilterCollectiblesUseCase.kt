@@ -10,12 +10,12 @@ import javax.inject.Inject
 enum class SortOption {
     PRICE,
     DATE,
-    PROFIT_LOSS
+    PROFIT_LOSS,
 }
 
 enum class SortDirection {
     ASCENDING,
-    DESCENDING
+    DESCENDING,
 }
 
 /**
@@ -23,30 +23,28 @@ enum class SortDirection {
  * and sorts them by [SortOption] and [SortDirection].
  */
 class FilterCollectiblesUseCase @Inject constructor(
-    private val repository: CollectibleRepository
+    private val repository: CollectibleRepository,
 ) {
     operator fun invoke(
         category: CollectibleCategory? = null,
         sortOption: SortOption = SortOption.DATE,
-        sortDirection: SortDirection = SortDirection.DESCENDING
-    ): Flow<List<CollectibleItem>> {
-        return repository.getCollectiblesStream().map { items ->
-            val filtered = if (category != null) {
-                items.filter { it.category == category }
-            } else {
-                items
-            }
+        sortDirection: SortDirection = SortDirection.DESCENDING,
+    ): Flow<List<CollectibleItem>> = repository.getCollectiblesStream().map { items ->
+        val filtered = if (category != null) {
+            items.filter { it.category == category }
+        } else {
+            items
+        }
 
-            val comparator: Comparator<CollectibleItem> = when (sortOption) {
-                SortOption.PRICE -> compareBy { it.marketPrice }
-                SortOption.DATE -> compareBy { it.acquisitionDate }
-                SortOption.PROFIT_LOSS -> compareBy { it.unrealizedProfitLoss }
-            }
+        val comparator: Comparator<CollectibleItem> = when (sortOption) {
+            SortOption.PRICE -> compareBy { it.marketPrice }
+            SortOption.DATE -> compareBy { it.acquisitionDate }
+            SortOption.PROFIT_LOSS -> compareBy { it.unrealizedProfitLoss }
+        }
 
-            when (sortDirection) {
-                SortDirection.ASCENDING -> filtered.sortedWith(comparator)
-                SortDirection.DESCENDING -> filtered.sortedWith(comparator.reversed())
-            }
+        when (sortDirection) {
+            SortDirection.ASCENDING -> filtered.sortedWith(comparator)
+            SortDirection.DESCENDING -> filtered.sortedWith(comparator.reversed())
         }
     }
 }

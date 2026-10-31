@@ -11,7 +11,7 @@ import javax.inject.Inject
  * and reactively computes the aggregated [PortfolioSummary].
  */
 class GetPortfolioSummaryUseCase @Inject constructor(
-    private val repository: CollectibleRepository
+    private val repository: CollectibleRepository,
 ) {
     operator fun invoke(): Flow<PortfolioSummary> {
         return repository.getCollectiblesStream().map { items ->
@@ -33,7 +33,7 @@ class GetPortfolioSummaryUseCase @Inject constructor(
                 totalCost = totalCost,
                 unrealizedProfitLoss = unrealizedProfitLoss,
                 returnPercentage = returnPercentage,
-                itemCount = items.size
+                itemCount = items.size,
             )
         }
     }

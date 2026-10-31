@@ -12,7 +12,6 @@ class CollectibleTypeConverters {
     fun fromCategory(category: CollectibleCategory): String = category.name
 
     @TypeConverter
-    fun toCategory(value: String): CollectibleCategory =
-        runCatching { CollectibleCategory.valueOf(value) }
-            .getOrDefault(CollectibleCategory.GradedCard)
+    fun toCategory(value: String): CollectibleCategory = runCatching { CollectibleCategory.valueOf(value) }
+        .getOrDefault(CollectibleCategory.GradedCard)
 }

@@ -20,7 +20,7 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF0F172A),
     surface = Color.White,
     onSurface = Color(0xFF0F172A),
-    surfaceContainerHigh = Color(0xFFF1F5F9)
+    surfaceContainerHigh = Color(0xFFF1F5F9),
 )
 
 private val DarkColorScheme = darkColorScheme(
@@ -36,18 +36,18 @@ private val DarkColorScheme = darkColorScheme(
     onBackground = Color(0xFFF8FAFC),
     surface = Color(0xFF111827),
     onSurface = Color(0xFFF8FAFC),
-    surfaceContainerHigh = Color(0xFF1E293B)
+    surfaceContainerHigh = Color(0xFF1E293B),
 )
 
 @Composable
 fun VaultXTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(
         colorScheme = colorScheme,
-        content = content
+        content = content,
     )
 }

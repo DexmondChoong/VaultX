@@ -34,44 +34,38 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor().apply {
-            level = if (BuildConfig.DEBUG) {
-                HttpLoggingInterceptor.Level.BODY
-            } else {
-                HttpLoggingInterceptor.Level.NONE
-            }
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if (BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
         }
     }
 
     @Provides
     @Singleton
     fun provideSimulatedMarketFeedInterceptor(
-        networkJson: Json
-    ): SimulatedMarketFeedInterceptor {
-        return SimulatedMarketFeedInterceptor(networkJson)
-    }
+        networkJson: Json,
+    ): SimulatedMarketFeedInterceptor = SimulatedMarketFeedInterceptor(networkJson)
 
     @Provides
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        simulatedMarketFeedInterceptor: SimulatedMarketFeedInterceptor
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .addInterceptor(simulatedMarketFeedInterceptor)
-            .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-            .build()
-    }
+        simulatedMarketFeedInterceptor: SimulatedMarketFeedInterceptor,
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .addInterceptor(simulatedMarketFeedInterceptor)
+        .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .build()
 
     @Provides
     @Singleton
     fun provideMarketFeedApi(
         okHttpClient: OkHttpClient,
-        networkJson: Json
+        networkJson: Json,
     ): MarketFeedApi {
         val contentType = "application/json".toMediaType()
         return Retrofit.Builder()

@@ -45,33 +45,39 @@ private val NegativeDeltaColor = Color(0xFFDC2626)
 fun CollectibleItemCard(
     item: CollectibleItem,
     onClick: (CollectibleItem) -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val currencyFormatter = remember { NumberFormat.getCurrencyInstance(Locale.US) }
     val profitLoss = item.unrealizedProfitLoss
     val isGain = profitLoss >= 0.0
     val deltaColor = if (isGain) PositiveDeltaColor else NegativeDeltaColor
-    val sign = if (profitLoss > 0.0) "+" else if (profitLoss < 0.0) "-" else ""
+    val sign = if (profitLoss > 0.0) {
+        "+"
+    } else if (profitLoss < 0.0) {
+        "-"
+    } else {
+        ""
+    }
 
     OutlinedCard(
         onClick = { onClick(item) },
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.outlinedCardColors(
-            containerColor = MaterialTheme.colorScheme.surface
-        )
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(14.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             // Thumbnail Preview Box
             CollectibleThumbnail(
                 category = item.category,
                 name = item.name,
-                modifier = Modifier.size(68.dp)
+                modifier = Modifier.size(68.dp),
             )
 
             Spacer(modifier = Modifier.width(14.dp))
@@ -79,7 +85,7 @@ fun CollectibleItemCard(
             // Middle Column: Title, Category & Condition Grade Badge
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(6.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 Text(
                     text = item.name,
@@ -87,38 +93,38 @@ fun CollectibleItemCard(
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
 
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     // Condition Grade Badge (e.g. PSA 10, BGS 9.5)
                     Surface(
                         color = MaterialTheme.colorScheme.primaryContainer,
-                        shape = RoundedCornerShape(6.dp)
+                        shape = RoundedCornerShape(6.dp),
                     ) {
                         Text(
                             text = item.conditionGrade,
                             style = MaterialTheme.typography.labelSmall,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
                         )
                     }
 
                     Text(
                         text = item.category.displayLabel(),
                         style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                 }
 
                 Text(
                     text = "Cost: ${currencyFormatter.format(item.purchasePrice)}",
                     style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
 
@@ -127,13 +133,13 @@ fun CollectibleItemCard(
             // Right Column: Current Market Estimate & Return Delta
             Column(
                 horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = currencyFormatter.format(item.marketPrice),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.ExtraBold,
-                    color = MaterialTheme.colorScheme.onSurface
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
 
                 Spacer(modifier = Modifier.height(4.dp))
@@ -145,11 +151,11 @@ fun CollectibleItemCard(
                         sign,
                         currencyFormatter.format(abs(profitLoss)),
                         sign,
-                        abs(item.returnPercentage)
+                        abs(item.returnPercentage),
                     ),
                     style = MaterialTheme.typography.labelSmall,
                     fontWeight = FontWeight.SemiBold,
-                    color = deltaColor
+                    color = deltaColor,
                 )
             }
         }
@@ -160,7 +166,7 @@ fun CollectibleItemCard(
 private fun CollectibleThumbnail(
     category: CollectibleCategory,
     name: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val gradientColors = when (category) {
         CollectibleCategory.GradedCard -> listOf(Color(0xFF1E3A8A), Color(0xFF3B82F6))
@@ -172,13 +178,13 @@ private fun CollectibleThumbnail(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
             .background(brush = Brush.linearGradient(gradientColors)),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = name.take(2).uppercase(Locale.US),
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.ExtraBold,
-            color = Color.White
+            color = Color.White,
         )
     }
 }

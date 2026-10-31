@@ -30,7 +30,6 @@ configure<SpotlessExtension> {
     kotlinGradle {
         target("**/*.gradle.kts")
         targetExclude("**/build/**/*.gradle.kts")
-        ktlint(libs.versions.ktlint.get())
         trimTrailingWhitespace()
         endWithNewline()
     }
