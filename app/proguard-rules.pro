@@ -22,7 +22,7 @@
 -keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
 
 # Preserve volatile fields updated via AtomicFieldUpdater in kotlinx.coroutines
--keepclassychangemembers class kotlinx.** {
+-keepclassmembers class kotlinx.** {
     volatile <fields>;
 }
 
